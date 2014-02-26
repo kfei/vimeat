@@ -1,0 +1,3 @@
+require './vimeat'
+
+run VimEat
