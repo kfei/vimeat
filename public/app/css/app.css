@@ -28,3 +28,19 @@
   content: "";
   padding: 0;
 }
+
+/* added by kfei for animation */
+.ng-enter{
+  transition: 0.75s;
+  opacity: 0;
+}
+.ng-enter-active{
+  opacity: 1;
+}
+/*.ng-leave{
+  transition: 0.75s;
+  opacity: 1;
+}
+.ng-leave-active{
+  opacity: 0;
+}*/

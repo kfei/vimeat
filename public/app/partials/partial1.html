@@ -1,1 +1,50 @@
-<p>This is the partial for view 1.</p>
+<div class="row-fluid">
+    <!-- Available Restaurants -->
+    <div class="well span2">
+        <div class="row-fluid">
+            <div>
+                <a href="#/view2" class="btn btn-default btn-block btn-success"><i class="icon-plus"></i> New Restaurant</a>  
+            </div>
+            <br/>
+            <div>
+                <legend>Restaurants</legend>
+                <ul class="nav nav-pills nav-stacked" ng-repeat="restaurant in restaurants">
+                  <li class=""><a href="#">
+                    <span class="badge pull-right">0</span>
+                    {{restaurant.name}}
+                  </a></li>
+                </ul>
+            </div>
+        </div>
+</div>
+<div class="span8">
+  <legend>Today</legend>
+  <div class="row-fluid text-center">
+    <div class="span4" ng-repeat="restaurant in today">
+      <div class="row-fluid">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAACuwEE+AAADtklEQVR4nO3Yb1PaWBiG8X7/j3KChSIFBFpFp2xx3CqotDO7LKDAWkjyFe6+SGi36M70fqH86fXiN+Mgepg8V0hOXqVpKuBXvdr0B8BuIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAaWHQom1t1lW0eVokIICiHozR9jxY/el+jhS1vF/D2lzkjL/HfJYqz+WV1voqAQIpXqp7oafVWyE+tvhx0KZqG/2mWVqw3VS/8/sGR+q+OD8H2o3weWzHX77iB7vdzU+2Y5+7nQ1PUs2YH1t8MOBbOy1LD9+umBJTNdtw4USm2dv3/908Di+wtVQlAIVV3NEqXJXP16NtTD87GmN+90EIJCpavxMlV890m1EBSiui7v42def/LEN9V22qNgYk17DRVCWZ3hXMOz4k8D+/q5mZ3RpQ8aLbP/M+qUsteObvUQzzU4zr4B3nYHuqhHCqGgRm+6NsxnWj/Z9HH9zYKJ7y9Vj4Iq3ZGW6XJtYInm/Vp+OehqEmcDnpznl4XqlWZJquThi06KPy4nhda1Zo8G+Xzrb/7Y/jbBJJp+eqsQIh0eNdVsNlRdDb5YU+vDZ00Gv3KGx5p08yGGok7/Xrzw+ttvz4IJT6v8qbvJ6h6ipt7aPUQ5v4eIp1c6iv77d+caL19u/c0f270KJtZ9v6N2+0SNfJcSyk2dtE/1cTBb25quXxJSpclcN62CQgiKDls6blUU5buU/ixRGt/pMr9vafaGusnvZw4//qPFS6y/8eO7d8H8OLPXPd7ePjGwNHsO0jurq7R6DlJbPQeJNbmoZsNs9DSNUyX/DvLtcVmd4eKZ19/0sd3LYLANCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgeUbSGMbBSALyykAAAAASUVORK5CYII=" class="img-polaroid">
+        <div class="text-center" style="padding: 10px;">
+          <h5>{{restaurant.restaurant}}  <span style="color: red;">{{restaurant.vote}}</span>  票</h5>
+        </div>
+        <div class="text-center">
+          <a ng-click="voteToday($index)" class="btn btn-default"><i class="icon-thumbs-up"></i> +1</a>
+        </div>
+      </div>
+      <div class="row-fluid">
+        ...
+        <ul class="unstyled">
+          <li ng-repeat="voter in restaurant.voters">{{voter}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="well span2">
+    <legend>History</legend>
+    <ul class="unstyled">
+      <li>...</li>
+      <li>...</li>
+      <li>...</li>
+    </ul>
+</div>
+</div>
