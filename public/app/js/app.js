@@ -11,9 +11,9 @@ angular.module('myApp', [
   'myApp.controllers'
 ]).
 config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-  $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-  $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
-  $routeProvider.otherwise({redirectTo: '/view1'});
-
-  //$locationProvider.html5Mode(true);
+  $routeProvider.when('/home', {templateUrl: 'partials/partial1.html', controller: 'HomeCtrl'});
+  $routeProvider.when('/create', {templateUrl: 'partials/partial2.html', controller: 'CreateCtrl'});
+  $routeProvider.when('/edit/:id', {templateUrl: 'partials/partial3.html', controller: 'EditCtrl'});
+  $routeProvider.otherwise({redirectTo: '/home'});
+  // $locationProvider.html5Mode(true);
 }]);

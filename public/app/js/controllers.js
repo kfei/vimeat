@@ -3,63 +3,158 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-  controller('MyCtrl1', ['$scope', '$http', '$location', function($scope, $http, $location) {
+controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+	$scope.currentHigh = 0;
   	// Phase 1: get the list of restaurants
   	$http({
-			method  : 'GET',
-			url     : '/restaurants',
-			headers : { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
-        })
-        .success(function(data, status, headers, config) {
-            $scope.restaurants = data.restaurants;
-    });
+  		method  : 'GET',
+  		url     : '/restaurants',
+  		headers : { 'Content-Type': 'application/json' }
+  	})
+  	.success(function(data, status, headers, config) {
+  		$scope.restaurants = data.restaurants;
+  	});
     // Phase 2: get the today object
-  	$http({
-			method  : 'GET',
-			url     : '/today',
-			headers : { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
-        })
-        .success(function(data, status, headers, config) {
-            $scope.today = data.today;
+    $http({
+    	method  : 'GET',
+    	url     : '/today',
+    	headers : { 'Content-Type': 'application/json' }
+    })
+    .success(function(data, status, headers, config) {
+    	$scope.today = data.today;
+    	sortVote();
     });
+
+    function sortVote() {
+    	$scope.currentHigh = 0;
+    	for (var i = 0; i < 3; i++) {
+    		if ($scope.today[i].vote > $scope.currentHigh) {
+    			$scope.currentHigh = $scope.today[i].vote;
+    		}
+    	}
+    	if ($scope.currentHigh == 0) {
+    		$scope.currentHigh = 999;
+    	}
+    }
 
     $scope.voteToday = function(index) {
-    	$scope.today[index].vote++;
-    	$scope.today[index].voters.push("kfei");
-    };
-
-	  
-  }])
-  .controller('MyCtrl2', ['$scope', '$http', '$location', function($scope, $http, $location) {
-	  $scope.tmp = 'hello2';
-	  $scope.rest = {};
-	  
-	  $scope.saveRestaurant = function(formData) {
-		$scope.rest.name = formData.name;
-		$scope.rest.creator = formData.creator;  
-	  };
-	  
-	  $scope.processForm = function() {
-	    $http({
+		// Post to server
+		var postData = {};
+		postData['index'] = index;
+		$http({
 			method  : 'POST',
-			url     : '/restaurants/create',
-			data    : $scope.formData,  // pass in data as strings
-			headers : { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
-        })
-        .success(function(data, status, headers, config) {
-        	
+			url     : '/today',
+			data    : postData,
+			headers : { 'Content-Type': 'application/json' }
+		})
+		.success(function(data, status, headers, config) {
+			if (data.result != 0) {
+            	// do error handling
+            } else {
+            	// Math.random().toString(36).replace(/[^a-z]+/g, '')
+            	$scope.today[index].vote++;
+            	$scope.today[index].voters.push(data.voter);
+            	sortVote();
+            }
+        });
+	};
+
+	$scope.viewImage = function(index) {
+		$location.path("/today");
+	};
+
+}])
+.controller('CreateCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {	  
+	$scope.processForm = function() {
+		if (!$scope.formData || !$scope.formData.name || !$scope.formData.creator) {
+			$scope.errorOccured = true;
+			return;
+		}
+		if(!$scope.formData.sleep) {
+			$scope.formData.sleep = false;
+		}
+
+		$http({
+			method  : 'POST',
+			url     : '/restaurants',
+			data    : $scope.formData,
+			headers : { 'Content-Type': 'application/json' }
+		})
+		.success(function(data, status, headers, config) {
+
             //console.log(data);
 
             if (false) {
-            // 	// if not successful, bind errors to error variables
-            //     $scope.errorName = data.errors.name;
-            //     $scope.errorSuperhero = data.errors.superheroAlias;
-            	$scope.rest.name = data;
-            } else {
-            	$location.path('/view1');
+	            // do error handling
+	        } else {
+	        	$location.path('/');
             // 	// if successful, bind success message to message
             //     $scope.message = data.message;
-            }
-        });
+        }
+    });
+	};
+
+	$scope.uploadFile = function(files) {
+	    var fd = new FormData();
+	    //Take the first selected file
+	    fd.append("file", files[0]);
+
+	    $http.post('/image', fd, {
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity
+	    });
+	};
+
+}])
+.controller('EditCtrl', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams) {
+	// Get the restaurants which is to be edited
+	$http({
+		method  : 'GET',
+		url     : '/restaurant/' + $routeParams.id,
+		headers : { 'Content-Type': 'application/json' }
+	})
+	.success(function(data, status, headers, config) {
+		$scope.formData = data;
+	});
+
+	$scope.deleteRestaurant = function (id) {
+		$http({
+			method  : 'DELETE',
+			url     : '/restaurant/' + $routeParams.id,
+			headers : { 'Content-Type': 'application/json' }
+		})
+		.success(function(data, status, headers, config) {
+			$location.path('/');
+		});
+	};
+
+	$scope.processForm = function() {	  	
+		if (!$scope.formData || !$scope.formData.name || !$scope.formData.creator) {
+			$scope.errorOccured = true;
+			return;
+		}
+		if(!$scope.formData.sleep) {
+			$scope.formData.sleep = false;
+		}
+
+	  	$http({
+	  		method  : 'POST',
+	  		url     : '/restaurant/' + $routeParams.id,
+	  		data    : $scope.formData,
+	  		headers : { 'Content-Type': 'application/json' }
+	  	})
+	  	.success(function(data, status, headers, config) {
+
+            //console.log(data);
+
+            if (false) {
+	            // do error handling
+	        } else {
+	        	$location.path('/');
+            // 	// if successful, bind success message to message
+            //     $scope.message = data.message;
+        }
+    });
 	  };
-  }]);
+	}]);
