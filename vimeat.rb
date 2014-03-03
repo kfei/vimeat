@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra/base'
 require 'sinatra/json'
 require 'json'
+require 'thin'
 
 class VimEat < Sinatra::Base
 	helpers Sinatra::JSON

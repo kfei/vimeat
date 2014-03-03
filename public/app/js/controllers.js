@@ -59,12 +59,8 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
         });
 	};
 
-	$scope.viewImage = function(index) {
-		$location.path("/today");
-	};
-
 }])
-.controller('CreateCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {	  
+.controller('CreateCtrl', ['$scope', '$http', '$location', 'createDialog', function($scope, $http, $location, createDialog) {	  
 	$scope.processForm = function() {
 		if (!$scope.formData || !$scope.formData.name || !$scope.formData.creator) {
 			$scope.errorOccured = true;
@@ -106,8 +102,16 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
 	    });
 	};
 
+	$scope.todoModal = function() {
+		createDialog('lib/todo.html',{
+		   id : 'todoDialog',
+		   title: '/* TODO: VimEat 0.2 ~ */',
+		   backdrop: true
+		});
+	};
+
 }])
-.controller('EditCtrl', ['$scope', '$http', '$location', '$routeParams', function($scope, $http, $location, $routeParams) {
+.controller('EditCtrl', ['$scope', '$http', '$location', '$routeParams', 'createDialog', function($scope, $http, $location, $routeParams, createDialog) {
 	// Get the restaurants which is to be edited
 	$http({
 		method  : 'GET',
@@ -117,6 +121,14 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
 	.success(function(data, status, headers, config) {
 		$scope.formData = data;
 	});
+
+	$scope.todoModal = function() {
+		createDialog('lib/todo.html',{
+		   id : 'todoDialog',
+		   title: '/* TODO: VimEat 0.2 ~ */',
+		   backdrop: true
+		});
+	};
 
 	$scope.deleteRestaurant = function (id) {
 		$http({

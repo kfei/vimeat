@@ -10,7 +10,7 @@
                             <input ng-model="formData.name" class="input-large" type="text" placeholder="name">
                             <label>提案人</label>
                             <input ng-model="formData.creator" class="input-large" type="text" placeholder="creator">
-                            <label>Tags <span style="font-style: italic; color: grey;">(delimited by ',')</span></label>
+                            <label>Tags <span style="color: grey;">(delimited by ',')</span></label>
                             <input ng-model="formData.tags" class="input-large" type="text" placeholder="tag1,tag2,tag3">
                             <label class="checkbox">
                                 <input ng-model="formData.sleep" type="checkbox"> 可午睡
@@ -23,7 +23,7 @@
                                 <img ng-if="formData.img" ng-src="{{'/img/' + formData.img}}" class="img-polaroid" style="height: 140px; width: 140px; overflow: hidden;">
                             </div>
                             <div class="row text-center" style="padding: 10px;">
-                                <a class="btn btn-small"><i class="icon-plus"></i> 上傳</a>
+                                <a ng-click="todoModal()" class="btn btn-small"><i class="icon-plus"></i> 上傳</a>
                             </div>
                         </div>
                     </div>        
