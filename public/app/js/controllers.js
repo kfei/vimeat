@@ -5,6 +5,8 @@
 angular.module('myApp.controllers', []).
 controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
 	$scope.currentHigh = 0;
+	$scope.showVotersFlag = true;
+
   	// Phase 1: get the list of restaurants
   	$http({
   		method  : 'GET',
@@ -35,7 +37,11 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
     	if ($scope.currentHigh == 0) {
     		$scope.currentHigh = 999;
     	}
-    }
+    };
+
+    $scope.showVoters = function() {
+    	$scope.showVotersFlag = !$scope.showVotersFlag;
+    };
 
     $scope.voteToday = function(index) {
 		// Post to server

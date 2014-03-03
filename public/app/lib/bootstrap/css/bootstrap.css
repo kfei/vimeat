@@ -5642,6 +5642,15 @@ a.thumbnail:focus {
   background-color: #999999;
 }
 
+/* added by kfei */
+.badge-vote {
+  margin-bottom: 4px; 
+  padding-bottom: 4px;
+  vertical-align: middle;
+  line-height: 125%;
+  font-size: 125%;
+}
+
 .label {
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;

@@ -23,7 +23,10 @@ class VimEat < Sinatra::Base
 	post '/restaurants' do
 		# Generates random string id for the new restaurant
 		id = ('A'..'Z').to_a.shuffle[0,10].join
+		# Add a random id
 		json_request = {'id' => id}.merge(JSON.parse(request.body.read))
+		# Add a count field
+		json_request.merge!({'count' => 0})
 
 		f = get_all_restaurants_json
 		f = '{"restaurants":[]}' if f.empty?
@@ -113,17 +116,25 @@ def read_or_create_today_random_pick
 	
 	if(!FileTest.exists?(file_name))
 		# today = { "today" : [
-		#           { "restaurant" : "KFC", "vote" : 3, "voters" : ["a", "b", "c", ... ], "img" : "file.jpg" }, {...}, {...} 
-		#          ] }
+		#           { "restaurant" : "KFC", "vote" : 3, "voters" : ["a", "b", "c", ... ], "sleep" : true, "img" : "file.jpg", "count" : 0 },
+		#           {...}, {...}, ..., {...} ] 
+		#         }
 		list = Array.new(3) { Hash.new }
-		i = 0
 		all = JSON.parse(get_all_restaurants_json)
-		all['restaurants'].sample(3).each do |x|
+
+
+		# First, select one restaurants with sleep tag
+		guarantee = all['restaurants'].select{ |r| r['sleep'] == true }.sample(1)[0]
+		list[0] = { "restaurant" => guarantee['name'], "vote" => 0, "voters" => Array.new, "sleep" => guarantee['sleep'], "img" => guarantee['img'] }
+
+		# 
+		i = 1
+		all['restaurants'].select{ |r| r['id'] != guarantee['id'] }.sample(2).each do |x|
 			# Initializes the today's array
 			if x['img']
-				list[i] = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "img" => x['img'] }
+				list[i] = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "sleep" => x['sleep'], "img" => x['img'] }
 			else
-				list[i] = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new }
+				list[i] = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "sleep" => x['sleep'] }
 			end
 			i += 1
 	    end
