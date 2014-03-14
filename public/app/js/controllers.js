@@ -5,7 +5,9 @@
 angular.module('myApp.controllers', []).
 controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
 	$scope.currentHigh = 0;
-	$scope.showVotersFlag = true;
+	$scope.showVotersFlag = false;
+	$scope.showCommentBoxFlags = [false, false, false];
+	$scope.speaking = [null, null, null];
 
   	// Phase 1: get the list of restaurants
   	$http({
@@ -41,6 +43,20 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
 
     $scope.showVoters = function() {
     	$scope.showVotersFlag = !$scope.showVotersFlag;
+    };
+
+    $scope.showCommentBoxFlag = function(index) {
+    	return $scope.showCommentBoxFlags[index];
+    };
+
+    $scope.showCommentBox = function(index) {
+    	$scope.showCommentBoxFlags[index] = !$scope.showCommentBoxFlags[index];
+    };
+
+    $scope.submitComment = function(index) {
+    	// TODO: websocket
+    	$scope.speaking[index] = null;
+    	// $scope.showCommentBox(index);
     };
 
     $scope.voteToday = function(index) {

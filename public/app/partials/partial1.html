@@ -17,67 +17,52 @@
       </div>
     </div>
   </div>
-  <div class="span9 well">
-    <!-- http://stackoverflow.com/questions/17470790/how-to-use-a-keypress-event-in-angularjs -->
-<!--     <div class="well row-fluid">
-      <legend>垃圾時間</legend>
-      <div class="span6">
-        <div class="input-append text-center row-fluid">
-          <input ng-model="speaking" class="span6" id="appendedInputButton" type="text">
-          <button class="btn" type="button"><i class="icon-comment"></i></button>  
+  <div class="span9 well"> 
+    <legend>今日隨機菜單</legend>
+    <div class="row-fluid">
+      <div class="span4 text-center" ng-repeat="restaurant in today">
+        <!-- Show a default image if there is no restaurant.img -->
+        <img ng-if="!restaurant.img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAACuwEE+AAADtklEQVR4nO3Yb1PaWBiG8X7/j3KChSIFBFpFp2xx3CqotDO7LKDAWkjyFe6+SGi36M70fqH86fXiN+Mgepg8V0hOXqVpKuBXvdr0B8BuIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAaWHQom1t1lW0eVokIICiHozR9jxY/el+jhS1vF/D2lzkjL/HfJYqz+WV1voqAQIpXqp7oafVWyE+tvhx0KZqG/2mWVqw3VS/8/sGR+q+OD8H2o3weWzHX77iB7vdzU+2Y5+7nQ1PUs2YH1t8MOBbOy1LD9+umBJTNdtw4USm2dv3/908Di+wtVQlAIVV3NEqXJXP16NtTD87GmN+90EIJCpavxMlV890m1EBSiui7v42def/LEN9V22qNgYk17DRVCWZ3hXMOz4k8D+/q5mZ3RpQ8aLbP/M+qUsteObvUQzzU4zr4B3nYHuqhHCqGgRm+6NsxnWj/Z9HH9zYKJ7y9Vj4Iq3ZGW6XJtYInm/Vp+OehqEmcDnpznl4XqlWZJquThi06KPy4nhda1Zo8G+Xzrb/7Y/jbBJJp+eqsQIh0eNdVsNlRdDb5YU+vDZ00Gv3KGx5p08yGGok7/Xrzw+ttvz4IJT6v8qbvJ6h6ipt7aPUQ5v4eIp1c6iv77d+caL19u/c0f270KJtZ9v6N2+0SNfJcSyk2dtE/1cTBb25quXxJSpclcN62CQgiKDls6blUU5buU/ixRGt/pMr9vafaGusnvZw4//qPFS6y/8eO7d8H8OLPXPd7ePjGwNHsO0jurq7R6DlJbPQeJNbmoZsNs9DSNUyX/DvLtcVmd4eKZ19/0sd3LYLANCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgeUbSGMbBSALyykAAAAASUVORK5CYII=" class="img-polaroid">
+        <!-- Show image from restaurant.img -->
+        <a href="{{'/img/' + restaurant.img}}" target="_blank">
+          <img ng-if="restaurant.img" ng-src="{{'/img/' + restaurant.img}}" class="img-polaroid" style="height: 140px; width: 140px; overflow: hidden;">
+        </a>
+
+        <div class="text-center" style="padding: 10px;">
+          <span ng-show="restaurant.sleep == true" class="label label-success">午休</span>
+          <strong style="font-size: 125%;"> {{restaurant.restaurant}} </strong>
+          <span title="{{restaurant.voters.join('\n')}}" ng-click="showVoters()" ng-show="restaurant.vote >= currentHigh" class="badge badge-important badge-vote" style="cursor:help">{{restaurant.vote}}</span>
+          <span ng-click="showVoters()" ng-show="restaurant.vote < currentHigh" class="badge badge-vote" style="cursor:help">{{restaurant.vote}}</span>
+          <strong style="font-size: 125%;">  票</strong>
         </div>
-      </div>
-      <div class="span6">
-        <span>{{speaking}}</span>
-      </div>
-    </div> -->
-    
-      <legend>今日隨機菜單</legend>
-      <div class="row-fluid">
-        <div class="span4 text-center" ng-repeat="restaurant in today">
-          <div class="row-fluid">
-            <!-- Show a default image if there is no restaurant.img -->
-            <img ng-if="!restaurant.img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAACuwEE+AAADtklEQVR4nO3Yb1PaWBiG8X7/j3KChSIFBFpFp2xx3CqotDO7LKDAWkjyFe6+SGi36M70fqH86fXiN+Mgepg8V0hOXqVpKuBXvdr0B8BuIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAaWHQom1t1lW0eVokIICiHozR9jxY/el+jhS1vF/D2lzkjL/HfJYqz+WV1voqAQIpXqp7oafVWyE+tvhx0KZqG/2mWVqw3VS/8/sGR+q+OD8H2o3weWzHX77iB7vdzU+2Y5+7nQ1PUs2YH1t8MOBbOy1LD9+umBJTNdtw4USm2dv3/908Di+wtVQlAIVV3NEqXJXP16NtTD87GmN+90EIJCpavxMlV890m1EBSiui7v42def/LEN9V22qNgYk17DRVCWZ3hXMOz4k8D+/q5mZ3RpQ8aLbP/M+qUsteObvUQzzU4zr4B3nYHuqhHCqGgRm+6NsxnWj/Z9HH9zYKJ7y9Vj4Iq3ZGW6XJtYInm/Vp+OehqEmcDnpznl4XqlWZJquThi06KPy4nhda1Zo8G+Xzrb/7Y/jbBJJp+eqsQIh0eNdVsNlRdDb5YU+vDZ00Gv3KGx5p08yGGok7/Xrzw+ttvz4IJT6v8qbvJ6h6ipt7aPUQ5v4eIp1c6iv77d+caL19u/c0f270KJtZ9v6N2+0SNfJcSyk2dtE/1cTBb25quXxJSpclcN62CQgiKDls6blUU5buU/ixRGt/pMr9vafaGusnvZw4//qPFS6y/8eO7d8H8OLPXPd7ePjGwNHsO0jurq7R6DlJbPQeJNbmoZsNs9DSNUyX/DvLtcVmd4eKZ19/0sd3LYLANCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgeUbSGMbBSALyykAAAAASUVORK5CYII=" class="img-polaroid">
-            <!-- Show image from restaurant.img -->
-            <a href="{{'/img/' + restaurant.img}}" target="_blank">
-              <img ng-if="restaurant.img" ng-src="{{'/img/' + restaurant.img}}" class="img-polaroid" style="height: 140px; width: 140px; overflow: hidden;">
-            </a>
-            <div class="text-center" style="padding: 10px;">
-              <span ng-show="restaurant.sleep == true" class="label label-success">午休</span>
-              <strong style="font-size: 125%;"> {{restaurant.restaurant}} </strong>
-              <span ng-click="showVoters()" ng-show="restaurant.vote >= currentHigh" class="badge badge-important badge-vote" style="cursor:help">{{restaurant.vote}}</span>
-              <span ng-click="showVoters()" ng-show="restaurant.vote < currentHigh" class="badge badge-vote" style="cursor:help">{{restaurant.vote}}</span>
-              <strong style="font-size: 125%;">  票</strong>
-            </div>
 
-            <!-- Show voters IP list -->
-            <div ng-show="showVotersFlag == true" class="row-fluid text-left" style="padding: 10px;">
-              <ul class="unstyled muted offset3 span6">
-                <li ng-repeat="voter in restaurant.voters"><i class="icon-thumbs-up"></i> {{voter}}</li>
-              </ul>
-            </div>
+        <!-- Show voters IP list -->
+        <div ng-show="showVotersFlag == true" class="row-fluid text-left" style="padding: 10px;">
+          <ul class="unstyled muted offset3 span6">
+            <li ng-repeat="voter in restaurant.voters"><i class="icon-thumbs-up"></i> {{voter}}</li>
+          </ul>
+        </div>
 
-            <!-- Show action buttons -->
-<!--             <div class="input-append">
-                <input ng-show="showVotersFlag == true" ng-model="speaking" class="span6" id="appendedInputButton" type="text" placeholder="garbage talk">
-                <button class="btn" type="button"><i class="icon-comment"></i></button>  
-            </div> -->
-            <div>
-              <a class="btn" type="button"><i class="icon-comment"></i></a> 
-              <a ng-click="voteToday($index)" class="btn btn-default"><i class="icon-thumbs-up"></i> +1</a>
-            </div>
-
-            <!-- Show talking wall -->
-            <div>
-              <ul class="unstyled">
-                <li>abcde</li>
-                <li>fghij</li>
-              </ul>
-            </div>
-
-          </div>
+        <!-- Show action buttons -->
+        <div>
+          <a ng-click="showCommentBox($index)" class="btn" type="button"><i class="icon-comment"></i></a> 
+          <a ng-click="voteToday($index)" class="btn btn-default"><i class="icon-thumbs-up"></i> +1</a>
+          <div ng-show="showCommentBoxFlag($index) == true" style="padding: 10px;">
+            <input ng-enter="submitComment($index)" ng-model="speaking[$index]" class="input-large" type="text" placeholder="... leave some garbage comments">
           </div>
         </div>
-      
+
+        <!-- Show talking wall -->
+        <hr style="border-bottom: 1px solid #e5e5e5;">
+        <div class="muted">
+          <ul class="unstyled">
+            <li><small title="12.34.56.78">Hello World!</small></li>
+            <li><small title="from 12.34.56.78">speaking</small></li>
+            <li><small>{{speaking[$index]}}</small></li>
+          </ul>
+        </div>
+
+      </div>
     </div>
   </div>
+</div>
