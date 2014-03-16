@@ -7,3 +7,4 @@ gem 'rack'
 gem 'thin', '1.5.1'
 
 gem 'em-websocket'
+gem 'em-http-request'

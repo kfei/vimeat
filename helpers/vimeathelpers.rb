@@ -19,11 +19,7 @@ module VimEatHelpers
 			i = 1
 			all['restaurants'].select{ |r| r['id'] != guarantee['id'] }.sample(2).each do |x|
 				# Initializes the today's array
-				if x['img']
-					list[i] = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "sleep" => x['sleep'], "img" => x['img'] }
-				else
-					list[i] = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "sleep" => x['sleep'] }
-				end
+				list[i] = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "sleep" => x['sleep'], "img" => x['img'] }
 				i += 1
 		    end
 
@@ -35,6 +31,14 @@ module VimEatHelpers
 		end
 
 		File.read(file_name)
+	end
+
+	def add_comment_on_today(comment)
+		today = JSON.parse(read_or_create_today_random_pick)
+		index, msg, ip = comment['index'], comment['msg'], comment['ip']
+		today['today'][index]['comments'] ||= []
+		today['today'][index]['comments'].push(comment.delete_if {|key| key == 'index'})
+		update_today_random_pick(today)
 	end
 
 	def get_all_restaurants_json

@@ -78,16 +78,20 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
     })
     .success(function(data, status, headers, config) {
         $scope.today = data.today;
-        // Init comments
+        // Init comments, in order to catch new comments from websocket.
         for (var i = 0; i < 3; i++) {
-            $scope.today[i].comments = [];
+            if (!$scope.today[i].comments) {
+                $scope.today[i].comments = [];
+            }
         }
         sortVote();
     });
 
-    // Websocket ==========================================================================================================
+    /******************************************************* Websocket ****************************************************/
 
     var socket, host;
+    // Important: Must change this server IP in production environment!
+    // e.g. host = ws://10.62.3.169:3001;
     host = "ws://localhost:3001";
 
     function connect() {
@@ -145,6 +149,6 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
         }
     }
 
-    // Websocket ==========================================================================================================
+    /******************************************************* Websocket ****************************************************/
 
 }]);

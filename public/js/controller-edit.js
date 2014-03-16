@@ -15,7 +15,7 @@ controller('EditCtrl', ['$scope', '$http', '$location', '$routeParams', 'createD
 	$scope.todoModal = function() {
 		createDialog('lib/todo.html',{
 			id : 'todoDialog',
-			title: '/* TODO: VimEat 0.2 ~ */',
+			title: '/* TODO: VimEat 0.3 ~ */',
 			backdrop: true
 		});
 	};

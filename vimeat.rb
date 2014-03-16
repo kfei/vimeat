@@ -5,10 +5,9 @@ require 'json'
 require 'thin'
 
 require_relative 'helpers/vimeathelpers'
-
-require_relative 'routes/restaurant.rb'
-require_relative 'routes/restaurants.rb'
-require_relative 'routes/today.rb'
+require_relative 'routes/restaurant'
+require_relative 'routes/restaurants'
+require_relative 'routes/today'
 
 class VimEat < Sinatra::Base
 	helpers Sinatra::JSON
@@ -22,7 +21,7 @@ class VimEat < Sinatra::Base
 	end
 
 	post '/image' do
-		file_name = 'public/app/img/' + params['file'][:filename]
+		file_name = 'public/img/' + params['file'][:filename]
 		File.open(file_name, "w") do |f| 
     		f.write (params['file'][:tempfile].read)
   		end

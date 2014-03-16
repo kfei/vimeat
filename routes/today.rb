@@ -28,4 +28,10 @@ class VimEat < Sinatra::Base
 		content_type :json
 		json response
 	end
+
+	post '/today/comments' do
+		msg = JSON.parse(request.body.read)
+		add_comment_on_today(msg)
+		200
+	end
 end
