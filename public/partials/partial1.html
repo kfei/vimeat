@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <!-- Available Restaurants -->
-  <div class="well span3">
+  <div class="well span2">
     <div class="row-fluid">
       <div>
         <a href="#/create" class="btn btn-default btn-block btn-success"><i class="icon-plus"></i> New</a>  
@@ -10,14 +10,14 @@
         <legend>合格店家</legend>
         <ul class="nav nav-list" ng-repeat="restaurant in restaurants">
           <li><a href="#/edit/{{restaurant.id}}">
-            <span class="badge pull-right">{{restaurant.count}}</span>
+            <!-- <span class="badge pull-right">{{restaurant.count}}</span> -->
             {{restaurant.name}}
           </a></li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="span9 well"> 
+  <div class="span10 well"> 
     <legend>今日隨機菜單</legend>
     <div class="row-fluid">
       <div class="span4 text-center" ng-repeat="restaurant in today">
@@ -37,7 +37,7 @@
         </div>
 
         <!-- Show voters IP list -->
-        <div ng-show="showVotersFlag == true" class="row-fluid text-left" style="padding: 10px;">
+        <div ng-show="showVotersFlag == true" class="row-fluid" style="padding: 10px;">
           <ul class="unstyled muted offset3 span6">
             <li ng-repeat="voter in restaurant.voters"><i class="icon-thumbs-up"></i> {{voter}}</li>
           </ul>
@@ -48,18 +48,14 @@
           <a ng-click="showCommentBox($index)" class="btn" type="button"><i class="icon-comment"></i></a> 
           <a ng-click="voteToday($index)" class="btn btn-default"><i class="icon-thumbs-up"></i> +1</a>
           <div ng-show="showCommentBoxFlag($index) == true" style="padding: 10px;">
-            <input ng-enter="submitComment($index)" ng-model="speaking[$index]" class="input-large" type="text" placeholder="... leave some garbage comments">
+            <input ng-enter="submitComment($index)" ng-model="speaking[$index]" class="input-large" type="text" placeholder="leave some garbage comments">
           </div>
         </div>
 
-        <!-- Show talking wall -->
+        <!-- Show comments wall -->
         <hr style="border-bottom: 1px solid #e5e5e5;">
-        <div class="muted">
-          <ul class="unstyled">
-            <li><small title="12.34.56.78">Hello World!</small></li>
-            <li><small title="from 12.34.56.78">speaking</small></li>
-            <li><small>{{speaking[$index]}}</small></li>
-          </ul>
+        <div class="muted" style="text-align: center;">
+          <span class="comment" ng-repeat="comment in restaurant.comments" title="{{comment.ip}}">{{comment.msg}}</span>
         </div>
 
       </div>

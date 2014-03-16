@@ -15,6 +15,7 @@ class VimEat < Sinatra::Base
 	helpers VimEatHelpers
 
 	set :public_folder, 'public'
+	settings.logging = true
 	
 	get '/' do
 		File.read(File.join('public', '/index.html'))
