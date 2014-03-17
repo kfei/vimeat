@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.controllers').
-controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($rootScope, $scope, $http, $location) {
 
     function sortVote() {
     	$scope.currentHigh = 0;
@@ -87,12 +87,31 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
         sortVote();
     });
 
+    function onFocus() {
+        $scope.isFocus = true;
+        $scope.$apply(function(){
+            $rootScope.unRead = 0;
+        });
+    };
+
+    function onBlur() {
+        $scope.isFocus = false;
+    };
+
+    if (/*@cc_on!@*/false) { // check for Internet Explorer
+        document.onfocusin = onFocus;
+        document.onfocusout = onBlur;
+    } else {
+        window.onfocus = onFocus;
+        window.onblur = onBlur;
+    }
+
     /******************************************************* Websocket ****************************************************/
 
     var socket, host;
     // Important: Must change this server IP in production environment!
     // e.g. host = ws://10.62.3.169:3001;
-    host = "ws://localhost:3001";
+    host = "ws://localhost:3002";
 
     function connect() {
         try {
@@ -128,6 +147,9 @@ controller('HomeCtrl', ['$scope', '$http', '$location', function($scope, $http, 
         // Use scope.$apply to ensure view updates right after model updates
         $scope.$apply(function(){
             $scope.today[index].comments.push(comment);
+            if ($scope.isFocus == false) {
+                $rootScope.unRead = $rootScope.unRead + 1;
+            }
         });
     }
 
