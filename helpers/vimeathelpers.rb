@@ -33,6 +33,28 @@ module VimEatHelpers
 		File.read(file_name)
 	end
 
+	def blackbox_pick(date, id)
+		file_name = "jsons/#{date}.json"
+
+		all = JSON.parse(get_all_restaurants_json)
+
+		x = all['restaurants'].select { |r| r['id'] == id }
+		if x.size != 1
+			puts "ID: #{id} IS NOT FOUND"
+			return
+		else
+			x = x[0]
+		end
+
+		black = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "sleep" => x['sleep'], "img" => x['img'] }
+
+		list = Array.new(3) { black }
+		today = { "today" => list, "random" => false }
+		File.open(file_name,'w') do |f|
+			f.write(today.to_json)
+		end
+	end
+
 	def add_comment_on_today(comment)
 		today = JSON.parse(read_or_create_today_random_pick)
 		index, msg, ip = comment['index'], comment['msg'], comment['ip']

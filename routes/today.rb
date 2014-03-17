@@ -29,6 +29,13 @@ class VimEat < Sinatra::Base
 		json response
 	end
 
+	post '/today/blackbox' do
+		# Usage: curl -d "date=20140317&id=ABCDEFGH" http://<host_address>/today/blackbox
+		date = params[:date]
+		id = params[:id]
+		blackbox_pick(date, id)
+	end
+
 	post '/today/comments' do
 		msg = JSON.parse(request.body.read)
 		add_comment_on_today(msg)

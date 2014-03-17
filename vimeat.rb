@@ -22,7 +22,7 @@ class VimEat < Sinatra::Base
 
 	post '/image' do
 		file_name = 'public/img/' + params['file'][:filename]
-		File.open(file_name, "w") do |f| 
+		File.open(file_name, "w") do |f|
     		f.write (params['file'][:tempfile].read)
   		end
   		200

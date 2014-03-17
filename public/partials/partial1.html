@@ -17,8 +17,8 @@
       </div>
     </div>
   </div>
-  <div class="span10 well"> 
-    <legend>今日隨機菜單</legend>
+  <div class="span10 well">
+    <legend>今日{{isTodayRandom == false ? '黑箱' : '隨機'}}菜單</legend>
     <div class="row-fluid">
       <div class="span4 text-center" ng-repeat="restaurant in today">
         <!-- Show a default image if there is no restaurant.img -->

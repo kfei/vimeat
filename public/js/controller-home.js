@@ -78,6 +78,7 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
     })
     .success(function(data, status, headers, config) {
         $scope.today = data.today;
+        $scope.isTodayRandom = data.random;
         // Init comments, in order to catch new comments from websocket.
         for (var i = 0; i < 3; i++) {
             if (!$scope.today[i].comments) {
@@ -111,7 +112,7 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
     var host;
     // Important: Must change this server IP in production environment!
     // e.g. host = ws://10.62.3.169:3001;
-    host = "ws://localhost:3002";
+    host = "ws://localhost:3001";
 
     function connect() {
         try {
