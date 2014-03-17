@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
     <meta charset="utf-8">
-    <title ng-bind="'VimEat' + ($root.unRead > 0 ? (' (' + $root.unRead + ')') : '')"></title>
+    <title ng-bind="($root.unRead > 0 ? ('(' + $root.unRead + ') ') : '') + 'VimEat'"></title>
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css"/>
 </head>
