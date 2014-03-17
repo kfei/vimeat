@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.controllers').
-controller('CreateCtrl', ['$scope', '$http', '$location', 'createDialog', function($scope, $http, $location, createDialog) {	  
+controller('CreateCtrl', ['$rootScope', '$scope', '$http', '$location', 'createDialog', function($rootScope, $scope, $http, $location, createDialog) {	  
 	$scope.processForm = function() {
 		if (!$scope.formData || !$scope.formData.name || !$scope.formData.creator) {
 			$scope.errorOccured = true;

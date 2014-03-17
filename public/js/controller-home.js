@@ -108,14 +108,14 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
 
     /******************************************************* Websocket ****************************************************/
 
-    var socket, host;
+    var host;
     // Important: Must change this server IP in production environment!
     // e.g. host = ws://10.62.3.169:3001;
     host = "ws://localhost:3002";
 
     function connect() {
         try {
-            socket = new WebSocket(host);
+            $rootScope.socket = new WebSocket(host);
 
             // addMessage("Socket State: " + socket.readyState);
 
@@ -127,7 +127,7 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
             //     addMessage("Socket Status: " + socket.readyState + " (closed)");
             // }
 
-            socket.onmessage = function(msg) {
+            $rootScope.socket.onmessage = function(msg) {
                 addMessage(msg.data);
             }
         } catch(exception) {
@@ -135,7 +135,13 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
         }
     }
 
-    connect();
+    if (!$rootScope.socket || $rootScope.socket.readyState != 1) {
+        connect();
+    } else {
+        $rootScope.socket.onmessage = function(msg) {
+            addMessage(msg.data);
+        }
+    }
 
     function addMessage(msg) {
         msg = JSON.parse(msg);
@@ -164,7 +170,7 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
         };
 
         try {
-          socket.send(JSON.stringify(jsonMsg));
+          $rootScope.socket.send(JSON.stringify(jsonMsg));
           // addMessage("Sent: " + msg)
         } catch(exception) {
           addMessage("Failed To Send")

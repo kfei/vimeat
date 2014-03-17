@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.controllers').
-controller('EditCtrl', ['$scope', '$http', '$location', '$routeParams', 'createDialog', function($scope, $http, $location, $routeParams, createDialog) {
+controller('EditCtrl', ['$rootScope', '$scope', '$http', '$location', '$routeParams', 'createDialog', function($rootScope, $scope, $http, $location, $routeParams, createDialog) {
 	// Get the restaurants which is to be edited
 	$http({
 		method  : 'GET',
