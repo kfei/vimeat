@@ -11,8 +11,6 @@ class VimEat < Sinatra::Base
 		id = ('A'..'Z').to_a.shuffle[0,10].join
 		# Add a random id
 		json_request = {'id' => id}.merge(JSON.parse(request.body.read))
-		# Add a count field
-		json_request.merge!({'count' => 0})
 
 		f = get_all_restaurants_json
 		f = '{"restaurants":[]}' if f.empty?
