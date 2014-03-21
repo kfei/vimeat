@@ -11,15 +11,22 @@ module VimEatHelpers
 			list = Array.new(3) { Hash.new }
 			all = JSON.parse(get_all_restaurants_json)
 
-
 			# First, select one restaurants with sleep tag
 			guarantee = all['restaurants'].select{ |r| r['sleep'] == true }.sample(1)[0]
-			list[0] = { "restaurant" => guarantee['name'], "vote" => 0, "voters" => Array.new, "sleep" => guarantee['sleep'], "img" => guarantee['img'] }
+			list[0] = { "restaurant" => guarantee['name'],\
+						      "vote" => 0,\
+						    "voters" => Array.new,\
+						     "sleep" => guarantee['sleep'],\
+						       "img" => guarantee['img'] }
 
 			i = 1
 			all['restaurants'].select{ |r| r['id'] != guarantee['id'] }.sample(2).each do |x|
 				# Initializes the today's array
-				list[i] = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "sleep" => x['sleep'], "img" => x['img'] }
+				list[i] = { "restaurant" => x['name'],\
+							      "vote" => 0,\
+							    "voters" => Array.new,\
+							     "sleep" => x['sleep'],\
+							       "img" => x['img'] }
 				i += 1
 		    end
 
@@ -46,7 +53,11 @@ module VimEatHelpers
 			x = x[0]
 		end
 
-		black = { "restaurant" => x['name'], "vote" => 0, "voters" => Array.new, "sleep" => x['sleep'], "img" => x['img'] }
+		black = { "restaurant" => x['name'],\
+			            "vote" => 0,\
+			          "voters" => Array.new,\
+			           "sleep" => x['sleep'],\
+			             "img" => x['img'] }
 
 		list = Array.new(3) { black }
 		today = { "today" => list, "random" => false }
