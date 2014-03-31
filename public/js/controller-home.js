@@ -109,10 +109,8 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
 
     /******************************************************* Websocket ****************************************************/
 
-    var host;
-    // Important: Must change this server IP in production environment!
-    // e.g. host = ws://10.62.3.169:3001;
-    host = "ws://localhost:3001";
+    // Read from config.js
+    var host = "ws://" + config.websocket_ip + ":" + config.websocket_port;
 
     function connect() {
         try {
