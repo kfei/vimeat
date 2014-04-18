@@ -30,6 +30,7 @@
 
         <div class="text-center" style="padding: 10px;">
           <span ng-show="restaurant.sleep == true" class="label label-success">午休</span>
+          <span ng-show="restaurant.ship == true" class="label label-success">外送</span>
           <strong style="font-size: 125%;"> {{restaurant.restaurant}} </strong>
           <span title="{{restaurant.voters.join('\n')}}" ng-click="showVoters()" ng-show="restaurant.vote >= currentHigh" class="badge badge-important badge-vote" style="cursor:help">{{restaurant.vote}}</span>
           <span title="{{restaurant.voters.join('\n')}}" ng-click="showVoters()" ng-show="restaurant.vote < currentHigh" class="badge badge-vote" style="cursor:help">{{restaurant.vote}}</span>

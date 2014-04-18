@@ -17,6 +17,7 @@ module VimEatHelpers
 						      "vote" => 0,\
 						    "voters" => Array.new,\
 						     "sleep" => guarantee['sleep'],\
+						      "ship" => guarantee['ship'],\
 						       "img" => guarantee['img'] }
 
 			i = 1
@@ -26,6 +27,7 @@ module VimEatHelpers
 							      "vote" => 0,\
 							    "voters" => Array.new,\
 							     "sleep" => x['sleep'],\
+							      "ship" => x['ship'],\
 							       "img" => x['img'] }
 				i += 1
 		    end
@@ -57,6 +59,7 @@ module VimEatHelpers
 			            "vote" => 0,\
 			          "voters" => Array.new,\
 			           "sleep" => x['sleep'],\
+			            "ship" => x['ship'],\
 			             "img" => x['img'] }
 
 		list = Array.new(3) { black }
@@ -75,7 +78,6 @@ module VimEatHelpers
 	end
 
 	def get_all_restaurants_json
-
 		file_name = 'jsons/restaurants.json'
 		if(!FileTest.exists?(file_name))
 			return ""
