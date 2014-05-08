@@ -22,7 +22,6 @@ class VimEat < Sinatra::Base
 		200
 	end
 
-
 	# Method to delete a key from the restaurants hash
 	# delete '/restaurants/key' do
 	# 	f = get_all_restaurants_json

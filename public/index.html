@@ -5,27 +5,20 @@
     <title ng-bind="($root.unRead > 0 ? ('(' + $root.unRead + ') ') : '') + 'VimEat'"></title>
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css"/>
 </head>
 
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" style="float: left; color: white;" href="/">VimEat <span style="font-size: 50%;" app-version></span></a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="">
-                        <a style="font-weight: bold;">中午要
-                        <span style="color: #CCFF66;"> 吃什麼?</span><span style="color: #FFCC00;"> 吃什麼?</span>
-                        <span style="color: #CCFF66;"> 吃什麼?</span><span style="color: #FFCC00;"> 吃什麼?</span>
-                        <span style="color: #CCFF66;"> 吃什麼?</span><span style="color: #FFCC00;"> 吃什麼?</span>
-                        <span style="color: #CCFF66;"> 吃什麼?</span><span style="color: #FFCC00;"> 吃什麼?</span>
-                        <span style="color: #CCFF66;"> 吃什麼?</span><span style="color: #FFCC00;"> 吃什麼?</span>
-                        <span style="color: #CCFF66;"> 吃什麼?</span><span style="color: #FFCC00;"> 吃什麼?</span>
-                        系統</a>
-                    </li>   
-                </ul>
-            </div>
+            <!-- <span style="font-size: 50%;" app-version></span> -->
+             <a class="navbar-brand" href="#"> <img style="height: 40px;" src="img/logo.png" /></a>
+             <ul class="nav pull-right">
+               <li><a> <i class="fa fa-cutlery"></i> 吃的</a></li>
+               <li><a> <i class="fa fa-coffee"></i> 喝的</a></li>
+               <li><a> <i class="fa fa-cog"></i> 設定</a></li>
+             </ul>
         </div>
     </div>
 </div>
