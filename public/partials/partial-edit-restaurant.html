@@ -1,8 +1,7 @@
-    <div class="row-fluid">
-        <!-- Restaurant Creation -->
-        <div class="row-fluid well offset3 span6">
+        <!-- Restaurant Edition -->
+        <div class="row-fluid offset2 span8">
             <legend>編輯店家</legend>
-            <form ng-submit="processForm()">
+            <form ng-submit="processEdition()">
                 <fieldset>
                     <div class="row-fluid">
                         <div class="span8">
@@ -32,8 +31,8 @@
                     </div>        
                     <div class="form-actions">
                         <button type="submit" class="btn btn-success">送出</button>
-                        <a class="btn" href="/">返回</a>
-                        <a ng-click="deleteRestaurant(formData.id)" class="btn btn-danger" style="float: right;">刪除店家</a>
+                        <a class="btn" href="#/home">返回</a>
+                        <a ng-click="deleteRestaurant(formData.id)" class="btn btn-danger pull-right">刪除店家</a>
                     </div>
                 </fieldset>
             </form>
@@ -41,4 +40,3 @@
                 Something goes wrong?
             </div>         
         </div>
-    </div>

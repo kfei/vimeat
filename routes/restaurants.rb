@@ -2,7 +2,8 @@ class VimEat < Sinatra::Base
 	# List all restaurants
 	get '/restaurants' do
 		content_type :json
-    	get_all_restaurants_json
+		restaurants = JSON.parse(get_all_restaurants_json)
+		JSON.pretty_generate(restaurants)
 	end
 
 	# Create a new restaurant

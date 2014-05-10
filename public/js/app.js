@@ -12,8 +12,8 @@ angular.module('vimEat', [
 ]).
 config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
-  $routeProvider.when('/create-restaurant', {templateUrl: 'partials/create-restaurant.html', controller: 'CreateCtrl'});
-  $routeProvider.when('/edit-restaurant/:id', {templateUrl: 'partials/edit-restaurant.html', controller: 'EditCtrl'});
+  $routeProvider.when('/show-restaurants/', {templateUrl: 'partials/show-restaurants.html', controller: 'RestaurantsCtrl'});
+  $routeProvider.when('/show-drinks/', {templateUrl: 'partials/show-drinks.html', controller: 'DrinksCtrl'});
   $routeProvider.otherwise({redirectTo: '/home'});
   // $locationProvider.html5Mode(true);
 }]).
