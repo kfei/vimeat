@@ -3,13 +3,13 @@
   <div class="well span2">
     <div class="row-fluid">
       <div>
-        <a href="#/create" class="btn btn-default btn-block btn-success"><i class="icon-plus"></i> New</a>  
+        <a href="#/create-restaurant" class="btn btn-default btn-block btn-success"><i class="icon-plus"></i> New</a>  
       </div>
       <br/>
       <div>
         <legend>合格店家</legend>
         <ul class="nav nav-list" ng-repeat="restaurant in restaurants">
-          <li><a href="#/edit/{{restaurant.id}}">
+          <li><a href="#/edit-restaurant/{{restaurant.id}}">
             <!-- <span class="badge pull-right">{{restaurant.count}}</span> -->
             {{restaurant.name}}
           </a></li>

@@ -11,9 +11,9 @@ angular.module('vimEat', [
   'fundoo.services'
 ]).
 config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-  $routeProvider.when('/home', {templateUrl: 'partials/partial1.html', controller: 'HomeCtrl'});
-  $routeProvider.when('/create', {templateUrl: 'partials/partial2.html', controller: 'CreateCtrl'});
-  $routeProvider.when('/edit/:id', {templateUrl: 'partials/partial3.html', controller: 'EditCtrl'});
+  $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
+  $routeProvider.when('/create-restaurant', {templateUrl: 'partials/create-restaurant.html', controller: 'CreateCtrl'});
+  $routeProvider.when('/edit-restaurant/:id', {templateUrl: 'partials/edit-restaurant.html', controller: 'EditCtrl'});
   $routeProvider.otherwise({redirectTo: '/home'});
   // $locationProvider.html5Mode(true);
 }]).
