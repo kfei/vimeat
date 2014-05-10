@@ -7,6 +7,8 @@ require 'thin'
 require_relative 'helpers/vimeathelpers'
 require_relative 'routes/restaurant'
 require_relative 'routes/restaurants'
+require_relative 'routes/drink'
+require_relative 'routes/drinks'
 require_relative 'routes/today'
 
 class VimEat < Sinatra::Base

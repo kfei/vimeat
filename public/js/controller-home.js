@@ -59,18 +59,8 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
     $scope.showVotersFlag = false;
     $scope.showCommentBoxFlags = [false, false, false];
     $scope.speaking = [null, null, null];
-
-    // Phase 1: get the list of restaurants
-    $http({
-        method  : 'GET',
-        url     : '/restaurants',
-        headers : { 'Content-Type': 'application/json' }
-    })
-    .success(function(data, status, headers, config) {
-        $scope.restaurants = data.restaurants;
-    });
     
-    // Phase 2: get the today object
+    // Phase 1: get the today object
     $http({
         method  : 'GET',
         url     : '/today',
@@ -78,9 +68,8 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
     })
     .success(function(data, status, headers, config) {
         $scope.today = data.today;
-        $scope.isTodayRandom = data.random;
         // Init comments, in order to catch new comments from websocket.
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 4; i++) {
             if (!$scope.today[i].comments) {
                 $scope.today[i].comments = [];
             }

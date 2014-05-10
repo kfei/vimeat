@@ -1,27 +1,52 @@
 module VimEatHelpers
-	def read_or_create_today_random_pick
+	def read_or_create_today(blackbox_id = nil)
 		date_str = `date "+%Y%m%d"`.chop!
 		file_name = "jsons/#{date_str}.json"
 		
 		if(!FileTest.exists?(file_name))
 			# today = { "today" : [
-			#           { "restaurant" : "KFC", "vote" : 3, "voters" : ["a", "b", "c", ... ], "sleep" : true, "img" : "file.jpg", "count" : 0 },
-			#           {...}, {...}, ..., {...} ] 
-			#         }
-			list = Array.new(3) { Hash.new }
-			all = JSON.parse(get_all_restaurants_json)
-
+			#           	{ "restaurant" : "KFC", "vote" : 3, "voters" : ["a", "b", ... ], "sleep" : true, "img" : "file.jpg", "count" : 0 },
+			#           	{...}, {...},
+			# 				{ "drink" : "50 Lan", "phone" : "3345678", "img" : "file.jpg" }  
+			#         ]}
 			i = 0
-			all['restaurants'].sample(3).each do |x|
-				# Initializes the today's array
-				list[i] = { "restaurant" => x['name'],\
-							      "vote" => 0,\
-							    "voters" => Array.new,\
-							       "img" => x['img'],\
-							     "sleep" => x['sleep'],\
-							      "ship" => x['ship'],\
-							        "ac" => x['ac'] }
-				i += 1
+			list = Array.new(4) { Hash.new }
+			all_r = JSON.parse(get_json_all('restaurant'))
+			all_d = JSON.parse(get_json_all('drink'))
+
+			if blackbox_id != nil && all_r['restaurants'].select { |r| r['id'] == blackbox_id }.size > 0
+				# Blackbox generation
+				x = all_r['restaurants'].select { |r| r['id'] == blackbox_id }[0]
+				3.times do
+					list[i] = { "restaurant" => x['name'],\
+								      "vote" => 0,\
+								    "voters" => Array.new,\
+								       "img" => x['img'],\
+								     "sleep" => x['sleep'],\
+								      "ship" => x['ship'],\
+								        "ac" => x['ac'] }
+					i += 1
+				end
+			elsif
+				# Random generation
+				all_r['restaurants'].sample(3).each do |x|
+					# Initializes the today's array
+					list[i] = { "restaurant" => x['name'],\
+								      "vote" => 0,\
+								    "voters" => Array.new,\
+								       "img" => x['img'],\
+								     "sleep" => x['sleep'],\
+								      "ship" => x['ship'],\
+								        "ac" => x['ac'] }
+					i += 1
+			    end		
+			end
+
+		    all_d['drinks'].sample(1).each do |x|
+		    	list[i] = { "drink" => x['name'],\
+		    				"phone" => x['phone'],\
+		    				  "img" => x['img'],\
+		    				  "min" => x['min'] }
 		    end
 
 		    today = { "today" => list }
@@ -34,43 +59,16 @@ module VimEatHelpers
 		File.read(file_name)
 	end
 
-	def blackbox_pick(date, id)
-		file_name = "jsons/#{date}.json"
-
-		all = JSON.parse(get_all_restaurants_json)
-
-		x = all['restaurants'].select { |r| r['id'] == id }
-		if x.size != 1
-			puts "ID: #{id} IS NOT FOUND"
-			return
-		else
-			x = x[0]
-		end
-
-		black = { "restaurant" => x['name'],\
-			            "vote" => 0,\
-			          "voters" => Array.new,\
-			           "sleep" => x['sleep'],\
-			            "ship" => x['ship'],\
-			             "img" => x['img'] }
-
-		list = Array.new(3) { black }
-		today = { "today" => list, "random" => false }
-		File.open(file_name,'w') do |f|
-			f.write(today.to_json)
-		end
-	end
-
 	def add_comment_on_today(comment)
-		today = JSON.parse(read_or_create_today_random_pick)
+		today = JSON.parse(read_or_create_today)
 		index, msg, ip = comment['index'], comment['msg'], comment['ip']
 		today['today'][index]['comments'] ||= []
 		today['today'][index]['comments'].push(comment.delete_if {|key| key == 'index'})
-		update_today_random_pick(today)
+		update_today_json(today)
 	end
 
-	def get_all_restaurants_json
-		file_name = 'jsons/restaurants.json'
+	def get_json_all(type)
+		file_name = 'jsons/' + type + 's.json'
 		if(!FileTest.exists?(file_name))
 			return ""
 		end
@@ -78,7 +76,7 @@ module VimEatHelpers
 		File.read(file_name)
 	end
 
-	def update_today_random_pick(today)
+	def update_today_json(today)
 		date_str = `date "+%Y%m%d"`.chop!
 
 		File.open("jsons/#{date_str}.json",'w') do |f|
@@ -95,8 +93,8 @@ module VimEatHelpers
 		return true
 	end
 
-	def update_restaurants_json(obj)
-		File.open('jsons/restaurants.json','w') do |f|
+	def update_json(type, obj)
+		File.open('jsons/' + type + 's.json','w') do |f|
 			f.write(obj.to_json)
 		end
 	end

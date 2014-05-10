@@ -7,8 +7,7 @@ angular.module('vimEat', [
   'vimEat.filters',
   'vimEat.services',
   'vimEat.directives',
-  'vimEat.controllers',
-  'fundoo.services'
+  'vimEat.controllers'
 ]).
 config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});

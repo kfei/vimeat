@@ -2,14 +2,14 @@
   <div class="well span3 offset1">
     <div>
       <legend>店家清單</legend>
-      <ul class="nav nav-list" ng-repeat="restaurant in restaurants">
+      <ul class="nav nav-list" ng-repeat="drink in drinks">
         <li>
-          <a ng-click="getInfo(restaurant.id)" href="">{{restaurant.name}}</a>
+          <a ng-click="getInfo(drink.id)" href="">{{drink.name}}</a>
         </li>
       </ul>
     </div>
   </div>
   <div class="well span7 row-fluid">
-    <div ng-include="'partials/partial-restaurant.html'"></div>
+    <div ng-include="'partials/partial-drink.html'"></div>
   </div>
 </div>
