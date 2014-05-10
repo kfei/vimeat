@@ -3,7 +3,8 @@ class VimEat < Sinatra::Base
 	get '/today' do
 		dateStr = `date "+%Y%m%d"`.chop!
 		content_type :json
-    	read_or_create_today_random_pick
+    	today = JSON.parse(read_or_create_today_random_pick)
+    	JSON.pretty_generate(today)
 	end
 	
 	# Update today's random pick, most likey a vote action.
