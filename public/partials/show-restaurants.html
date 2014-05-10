@@ -1,31 +1,16 @@
 <div class="row-fluid">
-  <div id="kfei" class="well span3 offset1">
-    <div class="row-fluid">
-      <div>
-        <legend>合格店家</legend>
-        <ul class="nav nav-list" ng-repeat="restaurant in restaurants">
-          <li>
-            <!-- <a href="#/show-restaurants/{{restaurant.id}}">{{restaurant.name}}</a> -->
-            <a ng-click="getInfo(restaurant.id)" href="">{{restaurant.name}}</a>
-          </li>
-        </ul>
-      </div>
+  <div class="well span3 offset1">
+    <div>
+      <legend>合格店家</legend>
+      <ul class="nav nav-list" ng-repeat="restaurant in restaurants">
+        <li>
+          <!-- <a href="#/show-restaurants/{{restaurant.id}}">{{restaurant.name}}</a> -->
+          <a ng-click="getInfo(restaurant.id)" href="">{{restaurant.name}}</a>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="well span7 row-fluid">
-<!--     <div ng-switch on="restaurant">
-      <div ng-switch-when="flash">
-        <div ng-include="'partials/partial-edit-restaurant.html'"></div>
-      </div>
-      <div ng-switch-default>
-       <div ng-include="'partials/partial-create-restaurant.html'"></div>
-     </div>
-    </div> -->
-    <div ng-if="formData.id">
-      <div ng-include="'partials/partial-edit-restaurant.html'"></div>
-    </div>
-    <div ng-if="!formData.id">
-      <div ng-include="'partials/partial-create-restaurant.html'"></div>
-    </div>
+    <div ng-include="'partials/partial-restaurant.html'"></div>
   </div>
 </div>

@@ -47,32 +47,6 @@ controller('RestaurantsCtrl', ['$rootScope', '$scope', '$http', '$routeParams', 
 	    $scope.img = files[0].name;
 	};
 
-	$scope.processCreation = function() {
-		if (!$scope.formData || !$scope.formData.name || !$scope.formData.creator) {
-			$scope.errorOccured = true;
-			return;
-		}
-		if(!$scope.formData.sleep) {
-			$scope.formData.sleep = false;
-		}
-
-		$http({
-			method  : 'POST',
-			url     : '/restaurants',
-			data    : $scope.formData,
-			headers : { 'Content-Type': 'application/json' }
-		})
-		.success(function(data, status, headers, config) {
-            if (false) {
-	            // TODO: do error handling
-	        } else {
-	        	$location.path('/show-restaurants');
-            	// if successful, bind success message to message
-                // $scope.message = data.message;
-            }
-        });
-	};
-
 	$scope.deleteRestaurant = function(id) {
 		$http({
 			method  : 'DELETE',
@@ -84,7 +58,7 @@ controller('RestaurantsCtrl', ['$rootScope', '$scope', '$http', '$routeParams', 
 		});
 	};
 
-	$scope.processEdition = function() {	  	
+	$scope.processForm = function() {
 		if (!$scope.formData || !$scope.formData.name || !$scope.formData.creator) {
 			$scope.errorOccured = true;
 			return;
@@ -93,19 +67,39 @@ controller('RestaurantsCtrl', ['$rootScope', '$scope', '$http', '$routeParams', 
 			$scope.formData.sleep = false;
 		}
 
-		$http({
-			method  : 'POST',
-			url     : '/restaurant/' + $scope.formData.id,
-			data    : $scope.formData,
-			headers : { 'Content-Type': 'application/json' }
-		})
-		.success(function(data, status, headers, config) {
-            if (false) {
-	            // TODO: do error handling
-	        } else {
-	        	$location.path('/show-restaurants');
-        	}
-    	});
+		if(!$scope.formData.id) {
+			// Create a new restaurant
+			$http({
+				method  : 'POST',
+				url     : '/restaurants',
+				data    : $scope.formData,
+				headers : { 'Content-Type': 'application/json' }
+			})
+			.success(function(data, status, headers, config) {
+	            if (false) {
+		            // TODO: do error handling
+		        } else {
+		        	$location.path('/show-restaurants');
+	            	// If successful, bind some success message to message
+	                // $scope.message = data.message;
+	            }
+	        });
+		} else {
+			// Edit a restaurant
+			$http({
+				method  : 'POST',
+				url     : '/restaurant/' + $scope.formData.id,
+				data    : $scope.formData,
+				headers : { 'Content-Type': 'application/json' }
+			})
+			.success(function(data, status, headers, config) {
+	            if (false) {
+		            // TODO: do error handling
+		        } else {
+		        	$location.path('/show-restaurants');
+	        	}
+	    	});
+		}
 	};
 
     function onFocus() {
