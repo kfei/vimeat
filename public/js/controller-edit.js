@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').
+angular.module('vimEat.controllers').
 controller('EditCtrl', ['$rootScope', '$scope', '$http', '$location', '$routeParams', 'createDialog', function($rootScope, $scope, $http, $location, $routeParams, createDialog) {
 	// Get the restaurants which is to be edited
 	$http({

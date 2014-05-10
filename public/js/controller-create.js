@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').
+angular.module('vimEat.controllers').
 controller('CreateCtrl', ['$rootScope', '$scope', '$http', '$location', 'createDialog', function($rootScope, $scope, $http, $location, createDialog) {	  
 	$scope.processForm = function() {
 		if (!$scope.formData || !$scope.formData.name || !$scope.formData.creator) {

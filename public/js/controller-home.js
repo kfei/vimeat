@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.controllers').
+angular.module('vimEat.controllers').
 controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($rootScope, $scope, $http, $location) {
 
     function sortVote() {
