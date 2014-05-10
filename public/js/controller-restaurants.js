@@ -26,14 +26,11 @@ controller('RestaurantsCtrl', ['$rootScope', '$scope', '$http', '$routeParams', 
 		});
     }
 
-	$scope.uploadFile = function(files) {
-		if(!$scope.formData) {
-			$scope.formData = {};
-		}
-
+	$scope.uploadFile = function(files, type) {
 	    var fd = new FormData();
 	    // Take the first selected file
 	    fd.append("file", files[0]);
+	    fd.append("type", type);
 
 	    $http.post('/image', fd, {
 	        withCredentials: true,
@@ -41,10 +38,8 @@ controller('RestaurantsCtrl', ['$rootScope', '$scope', '$http', '$routeParams', 
 	        transformRequest: angular.identity
 	    })
 	    .success(function(data, status, headers, config) {
-	    	$scope.formData.img = files[0].name;
+	    	$scope.formData.img = data;
 	    });
-
-	    $scope.img = files[0].name;
 	};
 
 	$scope.deleteRestaurant = function(id) {
@@ -65,6 +60,9 @@ controller('RestaurantsCtrl', ['$rootScope', '$scope', '$http', '$routeParams', 
 		}
 		if(!$scope.formData.sleep) {
 			$scope.formData.sleep = false;
+		}
+		if(!$scope.formData.img) {
+			$scope.formData.img = '';
 		}
 
 		if(!$scope.formData.id) {

@@ -1,30 +1,13 @@
 <div class="row-fluid">
-  <!-- Available Restaurants -->
-  <div class="well span2">
-    <div class="row-fluid">
-      <div>
-        <a href="#/create-restaurant" class="btn btn-default btn-block btn-success"><i class="icon-plus"></i> New</a>  
-      </div>
-      <br/>
-      <div>
-        <legend>合格店家</legend>
-        <ul class="nav nav-list" ng-repeat="restaurant in restaurants">
-          <li><a href="#/edit-restaurant/{{restaurant.id}}">
-            <!-- <span class="badge pull-right">{{restaurant.count}}</span> -->
-            {{restaurant.name}}
-          </a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="span10 well">
+  <!-- Today's restaurant -->
+  <div class="span9 well">
     <legend>今日{{isTodayRandom == false ? '黑箱' : '隨機'}}菜單</legend>
     <div class="row-fluid">
       <div class="span4 text-center" ng-repeat="restaurant in today">
         <!-- Show a default image if there is no restaurant.img -->
         <img ng-if="!restaurant.img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAACuwEE+AAADtklEQVR4nO3Yb1PaWBiG8X7/j3KChSIFBFpFp2xx3CqotDO7LKDAWkjyFe6+SGi36M70fqH86fXiN+Mgepg8V0hOXqVpKuBXvdr0B8BuIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAaWHQom1t1lW0eVokIICiHozR9jxY/el+jhS1vF/D2lzkjL/HfJYqz+WV1voqAQIpXqp7oafVWyE+tvhx0KZqG/2mWVqw3VS/8/sGR+q+OD8H2o3weWzHX77iB7vdzU+2Y5+7nQ1PUs2YH1t8MOBbOy1LD9+umBJTNdtw4USm2dv3/908Di+wtVQlAIVV3NEqXJXP16NtTD87GmN+90EIJCpavxMlV890m1EBSiui7v42def/LEN9V22qNgYk17DRVCWZ3hXMOz4k8D+/q5mZ3RpQ8aLbP/M+qUsteObvUQzzU4zr4B3nYHuqhHCqGgRm+6NsxnWj/Z9HH9zYKJ7y9Vj4Iq3ZGW6XJtYInm/Vp+OehqEmcDnpznl4XqlWZJquThi06KPy4nhda1Zo8G+Xzrb/7Y/jbBJJp+eqsQIh0eNdVsNlRdDb5YU+vDZ00Gv3KGx5p08yGGok7/Xrzw+ttvz4IJT6v8qbvJ6h6ipt7aPUQ5v4eIp1c6iv77d+caL19u/c0f270KJtZ9v6N2+0SNfJcSyk2dtE/1cTBb25quXxJSpclcN62CQgiKDls6blUU5buU/ixRGt/pMr9vafaGusnvZw4//qPFS6y/8eO7d8H8OLPXPd7ePjGwNHsO0jurq7R6DlJbPQeJNbmoZsNs9DSNUyX/DvLtcVmd4eKZ19/0sd3LYLANCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgeUbSGMbBSALyykAAAAASUVORK5CYII=" class="img-polaroid">
         <!-- Show image from restaurant.img -->
-        <a href="{{'/img/' + restaurant.img}}" target="_blank">
+        <a href="{{'/img/restaurants/' + restaurant.img}}" target="_blank">
           <img ng-if="restaurant.img" ng-src="{{'/img/restaurants/' + restaurant.img}}" class="img-polaroid" style="height: 140px; width: 140px; overflow: hidden;">
         </a>
 
@@ -49,7 +32,7 @@
           <a ng-click="showCommentBox($index)" class="btn" type="button"><i class="icon-comment"></i></a> 
           <a ng-click="voteToday($index)" class="btn btn-default"><i class="icon-thumbs-up"></i> +1</a>
           <div ng-show="showCommentBoxFlag($index) == true" style="padding: 10px;">
-            <input ng-enter="submitComment($index)" ng-model="speaking[$index]" class="input-large" type="text" placeholder="leave some garbage comments">
+            <input ng-enter="submitComment($index)" ng-model="speaking[$index]" class="input-large" type="text" placeholder="leave some garbage comments" style="margin-bottom: 0;">
           </div>
         </div>
 
@@ -59,6 +42,33 @@
           <span class="comment" ng-repeat="comment in restaurant.comments" title="{{comment.ip}}">{{comment.msg}}</span>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- Today's drink -->
+  <div class="span3 well">
+    <legend>今日飲料 {{today.drink.name}}</legend>
+    <div class="row-fluid">
+      <div class="text-center">
+        <!-- Show a default image if there is no restaurant.img -->
+        <img ng-if="!restaurant.img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAACuwEE+AAADtklEQVR4nO3Yb1PaWBiG8X7/j3KChSIFBFpFp2xx3CqotDO7LKDAWkjyFe6+SGi36M70fqH86fXiN+Mgepg8V0hOXqVpKuBXvdr0B8BuIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAaWHQom1t1lW0eVokIICiHozR9jxY/el+jhS1vF/D2lzkjL/HfJYqz+WV1voqAQIpXqp7oafVWyE+tvhx0KZqG/2mWVqw3VS/8/sGR+q+OD8H2o3weWzHX77iB7vdzU+2Y5+7nQ1PUs2YH1t8MOBbOy1LD9+umBJTNdtw4USm2dv3/908Di+wtVQlAIVV3NEqXJXP16NtTD87GmN+90EIJCpavxMlV890m1EBSiui7v42def/LEN9V22qNgYk17DRVCWZ3hXMOz4k8D+/q5mZ3RpQ8aLbP/M+qUsteObvUQzzU4zr4B3nYHuqhHCqGgRm+6NsxnWj/Z9HH9zYKJ7y9Vj4Iq3ZGW6XJtYInm/Vp+OehqEmcDnpznl4XqlWZJquThi06KPy4nhda1Zo8G+Xzrb/7Y/jbBJJp+eqsQIh0eNdVsNlRdDb5YU+vDZ00Gv3KGx5p08yGGok7/Xrzw+ttvz4IJT6v8qbvJ6h6ipt7aPUQ5v4eIp1c6iv77d+caL19u/c0f270KJtZ9v6N2+0SNfJcSyk2dtE/1cTBb25quXxJSpclcN62CQgiKDls6blUU5buU/ixRGt/pMr9vafaGusnvZw4//qPFS6y/8eO7d8H8OLPXPd7ePjGwNHsO0jurq7R6DlJbPQeJNbmoZsNs9DSNUyX/DvLtcVmd4eKZ19/0sd3LYLANCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgYVgYCEYWAgGFoKBhWBgIRhYCAYWgoGFYGAhGFgIBhaCgeUbSGMbBSALyykAAAAASUVORK5CYII=" class="img-polaroid">
+        <!-- Show drink's name -->
+        <div class="text-center" style="padding: 10px;">
+          <strong style="font-size: 125%;">傻瓜冰茶</strong>
+        </div>
+        <!-- Show action buttons -->
+        <div>
+          <!-- <a ng-click="showCommentBox($index)" class="btn" type="button"><i class="icon-comment"></i></a>  -->
+          <div>
+            <input ng-enter="submitComment(4)" ng-model="speaking[4]" class="input-large" type="text" placeholder="leave your order here">
+          </div>
+        </div>
+        <!-- Show comments wall -->
+        <hr style="border-bottom: 1px solid #e5e5e5;">
+        <div class="muted" style="text-align: center;">
+          <span class="comment" ng-repeat="comment in restaurant.comments" title="{{comment.ip}}">{{comment.msg}}</span>
+        </div>
       </div>
     </div>
   </div>

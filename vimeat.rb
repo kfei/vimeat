@@ -21,10 +21,20 @@ class VimEat < Sinatra::Base
 	end
 
 	post '/image' do
-		file_name = 'public/img/' + params['file'][:filename]
+		# Generates a random file name
+		id = ('A'..'Z').to_a.shuffle[0,10].join
+
+		# Determine this image is for restaurant or drink
+		if params['type'] == 'restaurant'
+			file_name = 'public/img/restaurants/' + id + '-' + params['file'][:filename]
+		elsif params['type'] == 'drink'
+			file_name = 'public/img/drinks/' + id + '-' + params['file'][:filename]
+		end
+
+		# Save image to file
 		File.open(file_name, "w") do |f|
     		f.write (params['file'][:tempfile].read)
   		end
-  		200
+		id + '-' + params['file'][:filename]
 	end
 end

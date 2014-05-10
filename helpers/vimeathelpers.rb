@@ -11,24 +11,16 @@ module VimEatHelpers
 			list = Array.new(3) { Hash.new }
 			all = JSON.parse(get_all_restaurants_json)
 
-			# First, select one restaurants with sleep tag
-			guarantee = all['restaurants'].select{ |r| r['sleep'] == true }.sample(1)[0]
-			list[0] = { "restaurant" => guarantee['name'],\
-						      "vote" => 0,\
-						    "voters" => Array.new,\
-						     "sleep" => guarantee['sleep'],\
-						      "ship" => guarantee['ship'],\
-						       "img" => guarantee['img'] }
-
-			i = 1
-			all['restaurants'].select{ |r| r['id'] != guarantee['id'] }.sample(2).each do |x|
+			i = 0
+			all['restaurants'].sample(3).each do |x|
 				# Initializes the today's array
 				list[i] = { "restaurant" => x['name'],\
 							      "vote" => 0,\
 							    "voters" => Array.new,\
+							       "img" => x['img'],\
 							     "sleep" => x['sleep'],\
 							      "ship" => x['ship'],\
-							       "img" => x['img'] }
+							        "ac" => x['ac'] }
 				i += 1
 		    end
 

@@ -16,8 +16,10 @@ class VimEat < Sinatra::Base
 				r['name'] = json_request['name']
 				r['creator'] = json_request['creator']
 				r['tags'] = json_request['tags']
+				r['img'] = json_request['img']
 				r['sleep'] = json_request['sleep']
 				r['ship'] = json_request['ship']
+				r['ac'] = json_request['ac']
 			end
 		end
 		update_restaurants_json(json_obj)
