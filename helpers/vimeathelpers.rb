@@ -4,11 +4,6 @@ module VimEatHelpers
 		file_name = "jsons/#{date_str}.json"
 		
 		if(!FileTest.exists?(file_name))
-			# today = { "today" : [
-			#           	{ "restaurant" : "KFC", "vote" : 3, "voters" : ["a", "b", ... ], "sleep" : true, "img" : "file.jpg", "count" : 0 },
-			#           	{...}, {...},
-			# 				{ "drink" : "50 Lan", "phone" : "3345678", "img" : "file.jpg" }  
-			#         ]}
 			i = 0
 			list = Array.new(4) { Hash.new }
 			all_r = JSON.parse(get_json_all('restaurant'))
@@ -22,6 +17,7 @@ module VimEatHelpers
 								      "vote" => 0,\
 								    "voters" => Array.new,\
 								       "img" => x['img'],\
+								     "phone" => x['phone'],\
 								     "sleep" => x['sleep'],\
 								      "ship" => x['ship'],\
 								        "ac" => x['ac'] }
@@ -29,12 +25,13 @@ module VimEatHelpers
 				end
 			elsif
 				# Random generation
-				all_r['restaurants'].sample(3).each do |x|
+				all_r['restaurants'].select { |r| r['ship'] == true }.sample(3).each do |x|
 					# Initializes the today's array
 					list[i] = { "restaurant" => x['name'],\
 								      "vote" => 0,\
 								    "voters" => Array.new,\
 								       "img" => x['img'],\
+								     "phone" => x['phone'],\
 								     "sleep" => x['sleep'],\
 								      "ship" => x['ship'],\
 								        "ac" => x['ac'] }

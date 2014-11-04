@@ -13,6 +13,7 @@ config(['$routeProvider', '$locationProvider', function($routeProvider, $locatio
   $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
   $routeProvider.when('/show-restaurants/', {templateUrl: 'partials/show-restaurants.html', controller: 'RestaurantsCtrl'});
   $routeProvider.when('/show-drinks/', {templateUrl: 'partials/show-drinks.html', controller: 'DrinksCtrl'});
+  $routeProvider.when('/bank/', {templateUrl: 'partials/show-bank.html', controller: 'BankCtrl'});
   $routeProvider.otherwise({redirectTo: '/home'});
   // $locationProvider.html5Mode(true);
 }]).

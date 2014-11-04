@@ -17,6 +17,7 @@ class VimEat < Sinatra::Base
 				r['creator'] = json_request['creator']
 				r['tags'] = json_request['tags']
 				r['img'] = json_request['img']
+				r['phone'] = json_request['phone']
 				r['sleep'] = json_request['sleep']
 				r['ship'] = json_request['ship']
 				r['ac'] = json_request['ac']

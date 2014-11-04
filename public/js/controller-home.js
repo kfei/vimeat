@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('vimEat.controllers').
-controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($rootScope, $scope, $http, $location) {
+controller('HomeCtrl',
+    ['$rootScope', '$scope', '$http', '$location', '$sce', function($rootScope, $scope, $http, $location, $sce) {
 
     function sortVote() {
     	$scope.currentHigh = 0;
@@ -95,6 +96,9 @@ controller('HomeCtrl', ['$rootScope', '$scope', '$http', '$location', function($
         window.onfocus = onFocus;
         window.onblur = onBlur;
     }
+
+    // Load config for ethercalc URL and add it as trusted
+    $scope.ethercalc_lunch = $sce.trustAsResourceUrl(config.ethercalc_lunch)
 
     /******************************************************* Websocket ****************************************************/
 

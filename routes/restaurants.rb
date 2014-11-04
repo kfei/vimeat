@@ -36,4 +36,14 @@ class VimEat < Sinatra::Base
 	# 	update_json('restaurant', tmp)
 	# 	200
 	# end
+
+	# Convert all restaurant.img to array
+	# get '/restaurants/array' do
+	# 	j = JSON.parse(get_json_all('restaurant'))
+	# 	j['restaurants'].each do |r|
+	# 		arr = [r['img']]
+	# 		r['img'] = arr
+	# 	end
+	# 	update_json('restaurant', j)
+	# end
 end
