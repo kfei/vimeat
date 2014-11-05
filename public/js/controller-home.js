@@ -59,28 +59,26 @@ controller('HomeCtrl',
     $scope.getLunchReport = function() {
         var report = {};
         $scope.lunchReport = {};
+        var column = config.ethercalc_lunch_column;
+        var size = config.ethercalc_lunch_size;
+
         // Get cells from ethercalc
         $http({
             method  : 'GET',
             url     : $sce.trustAsResourceUrl(config.ethercalc_lunch_cells)
         })
         .success(function(data, status, headers, config) {
-            for (var i = 2; i < 30; i++) {
-                // $scope.lunchReport.push(data['C' + i])
-                if (data['C' + i]['datavalue'] != "") {
-                    var key = data['C' + i]['datavalue'];
-                }
-                if (report.hasOwnProperty(key)) {
-                    report[key] += 1;
-                } else {
-                    report[key] = 1;
-                }
-            }
-            for (var k in report) {
-                if (k.length > 1) {
-                    $scope.lunchReport[k] = report[k];
+            for (var i = 2; i < size; i++) {
+                if (data[column + i]['datavalue'].length > 1) {
+                    var key = data[column + i]['datavalue'];
+                    if (report.hasOwnProperty(key)) {
+                        report[key] += 1;
+                    } else {
+                        report[key] = 1;
+                    }
                 }
             }
+            $scope.lunchReport = report;
         });
     };
 
