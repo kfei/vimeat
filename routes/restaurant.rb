@@ -21,6 +21,7 @@ class VimEat < Sinatra::Base
 				r['sleep'] = json_request['sleep']
 				r['ship'] = json_request['ship']
 				r['ac'] = json_request['ac']
+				r['min'] = json_request['min']
 			end
 		end
 		update_json('restaurant', json_obj)

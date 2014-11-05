@@ -56,6 +56,42 @@ controller('HomeCtrl',
         });
 	};
 
+    $scope.getLunchReport = function() {
+        var report = {};
+        $scope.lunchReport = {};
+        // Get cells from ethercalc
+        $http({
+            method  : 'GET',
+            url     : $sce.trustAsResourceUrl(config.ethercalc_lunch_cells)
+        })
+        .success(function(data, status, headers, config) {
+            for (var i = 2; i < 30; i++) {
+                // $scope.lunchReport.push(data['C' + i])
+                if (data['C' + i]['datavalue'] != "") {
+                    var key = data['C' + i]['datavalue'];
+                }
+                if (report.hasOwnProperty(key)) {
+                    report[key] += 1;
+                } else {
+                    report[key] = 1;
+                }
+            }
+            for (var k in report) {
+                if (k.length > 1) {
+                    $scope.lunchReport[k] = report[k];
+                }
+            }
+        });
+    };
+
+    $scope.showReportFlag = false;
+    $scope.showReport = function(column) {
+        if (!$scope.showReportFlag) {
+            $scope.getLunchReport();    
+        }
+        $scope.showReportFlag = !$scope.showReportFlag;
+    };
+
     $scope.currentHigh = 0;
     $scope.showVotersFlag = false;
     $scope.showCommentBoxFlags = [false, false, false];
