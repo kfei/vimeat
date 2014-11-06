@@ -69,7 +69,7 @@ controller('HomeCtrl',
         })
         .success(function(data, status, headers, config) {
             for (var i = 2; i < size; i++) {
-                if (data[column + i]['datavalue'].length > 1) {
+                if (data[column + i] && data[column + i]['datavalue'].length > 1) {
                     var key = data[column + i]['datavalue'];
                     if (report.hasOwnProperty(key)) {
                         report[key] += 1;
