@@ -56,10 +56,12 @@ controller('HomeCtrl',
         });
 	};
 
+    $scope.warningMessage = config.warning_message;
+
     $scope.getLunchReport = function() {
-        var report = {};
-        $scope.lunchReport = {};
-        var column = config.ethercalc_lunch_column;
+        $scope.lunchReport = [];
+        var columns = config.ethercalc_lunch_columns;
+        var report = [];
         var size = config.ethercalc_lunch_size;
 
         // Get cells from ethercalc
@@ -68,13 +70,13 @@ controller('HomeCtrl',
             url     : $sce.trustAsResourceUrl(config.ethercalc_lunch_cells)
         })
         .success(function(data, status, headers, config) {
-            for (var i = 2; i < size; i++) {
-                if (data[column + i] && data[column + i]['datavalue'].length > 1) {
-                    var key = data[column + i]['datavalue'];
-                    if (report.hasOwnProperty(key)) {
-                        report[key] += 1;
-                    } else {
-                        report[key] = 1;
+            for (var k in columns) {
+                report[k] = report[k] || {};
+                for (var i = 2; i < size; i++) {
+                    if (data[columns[k] + i] && data[columns[k] + i]['datavalue'].length > 1) {
+                        var key = data[columns[k] + i]['datavalue'];
+                        report[k][key] = report[k][key] || 0;
+                        report[k][key] += 1;
                     }
                 }
             }
@@ -83,7 +85,7 @@ controller('HomeCtrl',
     };
 
     $scope.showReportFlag = false;
-    $scope.showReport = function(column) {
+    $scope.showReport = function() {
         if (!$scope.showReportFlag) {
             $scope.getLunchReport();    
         }
