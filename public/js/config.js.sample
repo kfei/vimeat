@@ -1,10 +1,10 @@
-// var config = {
-// 	websocket_ip: '5.5.6.6',
-// 	websocket_port: '3001',
-//  warning_message: "Hello world!",
-// 	ethercalc_lunch: 'http://5.5.6.6:8000/lunch',
-// 	ethercalc_lunch_cells: 'http://5.5.6.6:8000/_/lunch/cells',
-// 	ethercalc_lunch_size: 30,
-// 	ethercalc_lunch_columns: ['C', 'H'],
-// 	ethercalc_bank: 'http://5.5.6.6:8000/bank.html'
-// };
+//var config = {
+//    websocket_ip: '5.5.6.6',
+//    websocket_port: '3001',
+//    warning_message: "Hello world!",
+//    ethercalc_lunch: 'http://5.5.6.6:8000/lunch',
+//    ethercalc_lunch_cells: 'http://5.5.6.6:8000/_/lunch/cells',
+//    ethercalc_lunch_size: 30,
+//    ethercalc_lunch_columns: ['C', 'H'],
+//    ethercalc_bank: 'http://5.5.6.6:8000/bank.html'
+//};
