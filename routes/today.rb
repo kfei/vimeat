@@ -30,10 +30,16 @@ class VimEat < Sinatra::Base
 		json response
 	end
 
+	delete '/today' do
+		remove_today
+		200
+	end
+
 	post '/today/blackbox' do
-		# Usage: curl -d "id=ABCDEFGH" http://<host_address>/today/blackbox
-		date = params[:date]
-		id = params[:id]
+		# Usage: curl -d "id=ABCDEFGHIJ" http://<host_address>/today/blackbox
+		json_request = JSON.parse(request.body.read)
+		id = json_request['id']
+		remove_today
 		read_or_create_today(id)
 	end
 
