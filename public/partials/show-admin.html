@@ -1,0 +1,21 @@
+<div class="row-fluid">
+  <div class="hero-unit">
+    <legend>管理功能</legend>
+    <div class="btn-group btn-group-vertical">
+      <a ng-click="removeToday()" class="btn btn-danger">翻桌！重新開獎！</a>
+      <br />
+
+      <a ng-click="blackboxToday(blackboxID)" class="btn btn-inverse">黑箱</a>
+      <input ng-model="blackboxID" type="text" placeholder="ABCDEFGHIJ" style="text-align: center">
+      <label>
+        <span style="color: grey;">See also: <a href="/restaurants">ID Reference</a></span>
+      </label>
+      <br />
+
+      <a ng-click="setWarningMessage(warnMsg)" class="btn btn-info">編輯公告欄</a>
+      <input ng-model="warnMsg" type="text" placeholder="Not implement yet" style="text-align: center">
+      <br />
+    </div>
+  </div>
+</div>
+
