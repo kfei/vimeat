@@ -21,6 +21,8 @@ ENV LC_ALL en_US.UTF-8
 
 RUN cp /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
+EXPOSE 80 3001
+
 ENTRYPOINT ["/usr/local/bin/bundle", "exec", "rackup", "config.ru"]
 
 VOLUME ["/vimeat/jsons", "/vimeat/img"]
