@@ -15,7 +15,8 @@ RUN set -x; build_deps="g++ gcc make ruby2.0-dev wget"; \
     gem install bundler && \
     bundle install && \
     locale-gen en_US.UTF-8 && \
-    apt-get purge -y --auto-remove ${build_deps}
+    apt-get purge -y --auto-remove ${build_deps} && \
+    apt-get autoremove -y
 
 ENV LC_ALL en_US.UTF-8
 
