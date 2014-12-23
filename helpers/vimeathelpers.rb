@@ -24,6 +24,7 @@ module VimEatHelpers
 								    "voters" => Array.new,\
 								       "img" => x['img'],\
 								     "phone" => x['phone'],\
+								       "min" => x['min'],\
 								     "sleep" => x['sleep'],\
 								      "ship" => x['ship'],\
 								        "ac" => x['ac'] }
@@ -38,6 +39,7 @@ module VimEatHelpers
 								    "voters" => Array.new,\
 								       "img" => x['img'],\
 								     "phone" => x['phone'],\
+                       "min" => x['min'],\
 								     "sleep" => x['sleep'],\
 								      "ship" => x['ship'],\
 								        "ac" => x['ac'] }

@@ -18,8 +18,9 @@
           <strong style="font-size: 125%;"> {{restaurant.restaurant}} </strong>
           <span title="{{restaurant.voters.join('\n')}}" ng-click="showVoters()" ng-show="restaurant.vote >= currentHigh" class="badge badge-important badge-vote" style="cursor:help">{{restaurant.vote}}</span>
           <span title="{{restaurant.voters.join('\n')}}" ng-click="showVoters()" ng-show="restaurant.vote < currentHigh" class="badge badge-vote" style="cursor:help">{{restaurant.vote}}</span>
-          <strong style="font-size: 125%;">  票</strong>
-          <span ng-if="restaurant.phone" class="muted"><br/> <i class="fa fa-phone"></i> {{restaurant.phone}} </span>&nbsp;
+          <strong style="font-size: 125%;">  票 </strong>
+          <br/>
+          <span ng-if="restaurant.phone" class="muted"><i class="fa fa-phone"></i> {{restaurant.phone}} </span>&nbsp;
           <span ng-if="restaurant.min" class="muted"> <i class="fa fa-exclamation-circle"></i> 滿 {{restaurant.min}} 可外送</span>
         </div>
 
