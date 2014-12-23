@@ -2,7 +2,8 @@ FROM ubuntu
 
 MAINTAINER kfei <kfei@kfei.net>
 
-ADD . /vimeat
+COPY Gemfile* /vimeat/
+
 WORKDIR /vimeat
 
 RUN set -x; build_deps="g++ gcc make ruby2.0-dev wget"; \
@@ -23,6 +24,8 @@ ENV LC_ALL en_US.UTF-8
 RUN cp /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 EXPOSE 80 3001
+
+COPY . /vimeat
 
 ENTRYPOINT ["/usr/local/bin/bundle", "exec", "rackup", "config.ru"]
 
