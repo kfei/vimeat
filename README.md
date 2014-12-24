@@ -2,6 +2,22 @@
 
 專為那些每天為了中午要吃什麼而困擾的的辦公室上班族們設計的隨機餐飲管理系統。
 
+## Frameworks
+
+  - Ruby
+  - Sinatra
+  - AngularJS
+
+## Screenshots
+
+![home](http://i.imgur.com/KdgMXl1.jpg)
+
+![restaurants](http://i.imgur.com/VNXQBKW.jpg)
+
+![bank](http://i.imgur.com/7CgHS2K.jpg)
+
+![admin](http://i.imgur.com/tFq2zHf.jpg)
+
 ## Quick Start
 
 直接跑：
